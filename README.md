@@ -1,3 +1,3 @@
 # Vital
 Team of Hackaton
-https://docs.google.com/document/d/1piEAlPYsIDRohZNw8_t5-zQvV-JRrjX1UvGhbS6nD_8/edit?usp=sharing
+https://docs.google.com/file/d/1MUx_ykwbQ21YdgcpuUgq_l80Te9nJQ8m/edit?usp=docslist_api&filetype=msword
