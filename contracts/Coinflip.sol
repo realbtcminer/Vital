@@ -232,6 +232,16 @@ contract CoinFlip is Common {
     }
 
     /**
+     * @dev function to add/remove bet token
+     *     Can only be called by owner
+     * @param token bet token address
+     * @param status true - bet token / false - token is not for betting
+     */
+    function setToken(address token, bool status) external onlyOwner {
+        isTokenAllowed[token] = status;
+    }
+
+    /**
      * @dev function to get current request player is await from VRF, returns 0 if none
      * @param player address of the player to get the state
      */
@@ -329,7 +339,7 @@ contract CoinFlip is Common {
             }
             balance = IERC20(tokenAddress).balanceOf(address(this));
         }
-        uint256 maxWager = (balance * 5) / 100;
+        uint256 maxWager = (balance * 11) / 1000;
         if (wager > maxWager) {
             revert WagerAboveLimit(wager, maxWager);
         }

@@ -767,7 +767,7 @@ interface VRFCoordinatorV2Interface {
     function pendingRequestExists(uint64 subId) external view returns (bool);
 }
 
-// File: CoinFlipSol/Common.sol
+// File: CoinFlip/Common.sol
 
 pragma solidity ^0.8.0;
 
@@ -853,8 +853,8 @@ contract Common is ReentrancyGuard {
             .getFeeConfig();
 
         fee =
-            tx.gasprice *
-            ((18 * gasAmount) / 10) +
+            (tx.gasprice * 18 * gasAmount) /
+            10 +
             ((1e12 *
                 uint256(fulfillmentFlatFeeLinkPPMTier1) *
                 uint256(answer)) / 1e18);
@@ -995,7 +995,7 @@ contract Common is ReentrancyGuard {
     }
 }
 
-// File: CoinFlipSol/CoinFlip.sol
+// File: CoinFlip/Coinflip.sol
 
 pragma solidity ^0.8.0;
 
@@ -1228,6 +1228,16 @@ contract CoinFlip is Common {
     }
 
     /**
+     * @dev function to add/remove bet token
+     *     Can only be called by owner
+     * @param token bet token address
+     * @param status true - bet token / false - token is not for betting
+     */
+    function setToken(address token, bool status) external onlyOwner {
+        isTokenAllowed[token] = status;
+    }
+
+    /**
      * @dev function to get current request player is await from VRF, returns 0 if none
      * @param player address of the player to get the state
      */
@@ -1325,7 +1335,7 @@ contract CoinFlip is Common {
             }
             balance = IERC20(tokenAddress).balanceOf(address(this));
         }
-        uint256 maxWager = (balance * 5) / 100;
+        uint256 maxWager = (balance * 11) / 1000;
         if (wager > maxWager) {
             revert WagerAboveLimit(wager, maxWager);
         }
