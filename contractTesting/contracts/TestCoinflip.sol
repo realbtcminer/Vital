@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.0;
 
-import "./Common.sol";
+import "./TestCommon.sol";
 
 contract CoinFlip is Common {
     using SafeERC20 for IERC20;
