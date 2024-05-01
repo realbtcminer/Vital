@@ -23,7 +23,7 @@ interface IVRFCoordinatorV2 is VRFCoordinatorV2Interface {
         );
 }
 
-contract Common is ReentrancyGuard {
+contract TestCommon is ReentrancyGuard {
     using SafeERC20 for IERC20;
 
     uint256 public VRFFees;

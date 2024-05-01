@@ -356,6 +356,13 @@ contract CoinFlip is Common {
     }
 
     /**
+     * @dev returns contract address(used in the template)
+     */
+    function getAddress() external view returns (address) {
+        return address(this);
+    }
+
+    /**
      * @dev calculates the maximum wager allowed based on the bankroll size
      */
     function _kellyWager(uint256 wager, address tokenAddress) internal view {

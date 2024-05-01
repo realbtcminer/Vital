@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "./TestCommon.sol";
 
-contract CoinFlip is Common {
+contract TestCoinFlip is TestCommon {
     using SafeERC20 for IERC20;
 
     mapping(address => CoinFlipGame) coinFlipGames;
@@ -17,7 +17,7 @@ contract CoinFlip is Common {
         address link_eth_feed,
         address tokenAllowed,
         address wrappedToken
-    ) Common(subscriptionID, link_eth_feed, _vrf, _keyHash, wrappedToken) {
+    ) TestCommon(subscriptionID, link_eth_feed, _vrf, _keyHash, wrappedToken) {
         isTokenAllowed[tokenAllowed] = true;
     }
 
