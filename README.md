@@ -5,7 +5,7 @@ doc for review - https://docs.google.com/document/d/1pG1N77kprJYHvbLam-uNAeZePPr
 
 ## Testing contracts
 To run the tests:
-```git clone https://github.com/username/repository.git```
+```https://github.com/realbtcminer/Vital.git```
 
 Go to contractTesting ```cd contractTesting```
 
