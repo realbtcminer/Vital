@@ -1004,17 +1004,17 @@ contract CoinFlip is Common {
 
     mapping(address => CoinFlipGame) coinFlipGames;
     mapping(uint256 => address) coinIDs;
-    mapping(address => bool) public isTokenAllowed;
+    address public tokenAllowed;
 
     constructor(
         uint64 subscriptionID,
         address _vrf,
         bytes32 _keyHash,
         address link_eth_feed,
-        address tokenAllowed,
+        address _tokenAllowed,
         address wrappedToken
     ) Common(subscriptionID, link_eth_feed, _vrf, _keyHash, wrappedToken) {
-        isTokenAllowed[tokenAllowed] = true;
+        tokenAllowed = _tokenAllowed;
     }
 
     struct CoinFlipGame {
@@ -1098,9 +1098,8 @@ contract CoinFlip is Common {
     /**
      * @dev event emitted when a setting of bet token is done
      * @param token bet token address
-     * @param status true - bet token / false - token is not for betting
      */
-    event Token_Set_Event(address token, bool status);
+    event Token_Set_Event(address token);
 
     /**
      * @dev event emitted when a withdrawal of token is done
@@ -1259,11 +1258,10 @@ contract CoinFlip is Common {
      * @dev function to add/remove bet token
      *     Can only be called by owner
      * @param token bet token address
-     * @param status true - bet token / false - token is not for betting
      */
-    function setToken(address token, bool status) external onlyOwner {
-        emit Token_Set_Event(token, status);
-        isTokenAllowed[token] = status;
+    function setToken(address token) external onlyOwner {
+        emit Token_Set_Event(token);
+        tokenAllowed = token;
     }
 
     /**
@@ -1366,7 +1364,7 @@ contract CoinFlip is Common {
         if (tokenAddress == address(0)) {
             balance = address(this).balance;
         } else {
-            if (isTokenAllowed[tokenAddress] == false) {
+            if (tokenAllowed == tokenAddress) {
                 revert InvalidToken();
             }
             balance = IERC20(tokenAddress).balanceOf(address(this));
