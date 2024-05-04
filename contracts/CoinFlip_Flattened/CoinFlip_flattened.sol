@@ -1364,7 +1364,7 @@ contract CoinFlip is Common {
         if (tokenAddress == address(0)) {
             balance = address(this).balance;
         } else {
-            if (tokenAllowed == tokenAddress) {
+            if (tokenAllowed != tokenAddress) {
                 revert InvalidToken();
             }
             balance = IERC20(tokenAddress).balanceOf(address(this));
